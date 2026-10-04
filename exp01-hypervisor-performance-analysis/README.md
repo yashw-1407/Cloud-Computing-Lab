@@ -207,7 +207,7 @@ Cloud-Computing-Lab/
 │
 ├── README.md
 │
-└── Exp1/
+└── exp01-hypervisor-performance-analysis/
     │
     ├── README.md
     │

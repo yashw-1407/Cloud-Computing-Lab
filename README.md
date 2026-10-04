@@ -8,4 +8,4 @@ This repository contains the laboratory experiments and projects for the Cloud C
 |---|---|---|
 | Experiment 1 | Performance Analysis of Type-1 and Type-2 Hypervisors | Completed |
 
-[View Experiment 1 Details](Exp1/README.md)
+[View Experiment 1 Details](exp01-hypervisor-performance-analysis/README.md)
