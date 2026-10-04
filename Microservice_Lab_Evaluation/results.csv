@@ -1,0 +1,6 @@
+concurrency,requests,failed,avg_rt_ms,p95_ms,throughput_rps,flask_microservices-order-service-1_cpu%,flask_microservices-order-service-1_mem_MiB,flask_microservices-payment-service-1_cpu%,flask_microservices-payment-service-1_mem_MiB,flask_microservices-product-service-1_cpu%,flask_microservices-product-service-1_mem_MiB
+1,1912,0,15.06,19,65.67,36.32,50.04,11.59,41.43,11.15,41.13
+2,2355,0,24.39,38,80.8,55.42,54.32,17.74,42.8,16.4,41.59
+4,2708,0,42.56,68,92.37,90.66,58.12,25.24,44.2,23.46,42.04
+8,2739,0,84.76,140,93.24,95.34,62.41,23.96,45.3,22.4,42.34
+16,2804,0,166.54,260,95.09,101.05,66.81,25.81,46.62,23.22,42.59
