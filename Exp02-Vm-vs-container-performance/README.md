@@ -101,7 +101,75 @@ The experimental setup can be summarized as follows:
 
 ### Experimental Architecture
 
-![Experimental Architecture](docs/architecture.png)
+```mermaid
+flowchart TD
+    subgraph Host["💻 Windows Host (VMware)"]
+        direction TB
+        HostDesc["Host machine for the experiment<br>VMware (virtualization software)<br>Runs Ubuntu 22.04 VM"]
+    end
+
+    subgraph Environment["🐧 Ubuntu 22.04 LTS (Virtual Machine)"]
+        direction LR
+        subgraph VM["VM (Native Environment)"]
+            VMDesc["• Ubuntu 22.04 (hosted in VMware)<br>• 4 vCPU<br>• 7.7 GiB RAM<br>• Directly executes workloads"]
+        end
+        
+        SameEnv(("Same<br>Ubuntu<br>Environment"))
+        
+        subgraph Docker["🐳 Docker Container"]
+            DockerDesc["• Docker (inside the same Ubuntu VM)<br>• CPU limit: 4<br>• Memory limit: 7.7 GiB<br>• Runs the same workloads as VM"]
+        end
+        
+        VM <--> SameEnv <--> Docker
+    end
+    
+    Host --> Environment
+    
+    subgraph Workloads["⚙️ Workloads / Experiments"]
+        direction LR
+        CPU["<b>Baseline CPU</b><br>• Measure CPU performance<br>• System information"]
+        Mem["<b>Memory (Sysbench)</b><br>• 10 runs (VM)<br>• 10 runs (Container)<br>• 10 GB memory test<br>• Measure throughput"]
+        Disk["<b>Disk I/O (fio)</b><br>• Sequential read<br>• Sequential write<br>• Random read<br>• Random write"]
+        API["<b>FastAPI Application</b><br>• Endpoints: /health, /compute, /memory<br>• Apache Benchmark (ab)<br>• Measure requests/sec, latency<br>• Compare VM vs Container"]
+    end
+    
+    Environment --> Workloads
+    
+    subgraph Results["📈 Results Collection"]
+        direction LR
+        Raw["📄 <b>Raw Results</b><br>results/raw/<br>• Actual benchmark output"]
+        Proc["🗂️ <b>Processed Results</b><br>results/processed/<br>• Extracted metrics (CSV)"]
+        Figs["📊 <b>Figures / Graphs</b><br>results/figures/<br>• Comparative plots (PNG)"]
+    end
+    
+    Workloads --> Results
+    
+    subgraph Analysis["📝 Analysis and Documentation"]
+        direction LR
+        Ana["📓 <b>Analysis</b><br>analysis/<br>• Jupyter notebook"]
+        Meth["📄 <b>Methodology</b><br>docs/methodology.md<br>• Experiment setup"]
+        Arch["🖼️ <b>Architecture Diagram</b><br>README.md<br>• This diagram"]
+        Rep["📖 <b>Final Report</b><br>README.md<br>• Results, discussion"]
+    end
+    
+    Results --> Analysis
+
+    classDef hostBox fill:#e6e6fa,stroke:#9370db,stroke-width:2px,color:#000
+    classDef envBox fill:#e0f7fa,stroke:#00bcd4,stroke-width:2px,color:#000
+    classDef vmBox fill:#dcedc8,stroke:#8bc34a,stroke-width:2px,color:#000
+    classDef dockerBox fill:#fff9c4,stroke:#ffeb3b,stroke-width:2px,color:#000
+    classDef workBox fill:#fbe9e7,stroke:#ffab91,stroke-width:2px,color:#000
+    classDef resBox fill:#eceff1,stroke:#cfd8dc,stroke-width:2px,color:#000
+    classDef anaBox fill:#f3e5f5,stroke:#ce93d8,stroke-width:2px,color:#000
+    
+    class Host hostBox
+    class Environment envBox
+    class VM vmBox
+    class Docker dockerBox
+    class Workloads workBox
+    class Results resBox
+    class Analysis anaBox
+```
 
 ## Methodology
 
