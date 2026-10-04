@@ -70,7 +70,7 @@ flowchart TD
 ## Sysbench Command
 
 ```bash
-sysbench cpu --cpu-max-prime=20000 run
+sysbench cpu --cpu-max-prime=20000 run # Runs CPU test calculating primes up to 20,000
 ```
 
 This command executes a CPU performance benchmark by calculating prime numbers up to 20,000. It measures the raw processing capability of the virtualized CPU and generates metrics including total execution time, total events, events per second, and average latency.
@@ -81,23 +81,23 @@ The Ubuntu VM was created directly on the Proxmox VE environment. The VM was ass
 
 The system configuration was verified within the Ubuntu terminal using:
 ```bash
-hostnamectl
-lscpu
-free -h
-df -h
-top
+hostnamectl # Shows system hostname, OS details, and architecture
+lscpu       # Displays CPU architecture information and number of cores
+free -h     # Shows available and used RAM in human-readable format
+df -h       # Displays disk space usage for all mounted filesystems
+top         # Real-time view of running processes and resource usage
 ```
 
 Sysbench was then installed using the package manager:
 ```bash
-sudo apt update
-sudo apt install sysbench -y
-sysbench --version
+sudo apt update              # Updates the package list for the APT package manager
+sudo apt install sysbench -y # Installs the Sysbench tool automatically
+sysbench --version           # Verifies the installation by checking the installed version
 ```
 
 Once installed, the CPU benchmark was executed:
 ```bash
-sysbench cpu --cpu-max-prime=20000 run
+sysbench cpu --cpu-max-prime=20000 run # Runs CPU test calculating primes up to 20,000
 ```
 
 ### Type-1 Screenshots
@@ -149,6 +149,34 @@ An equivalent Ubuntu virtual machine was created using VMware Workstation hosted
 | Total Events | 14,548 | 10,381 |
 | Events per Second | 1,453.98 | 1,037.93 |
 | Average Latency | 0.69 ms | 0.96 ms |
+
+## Generated Graphs
+
+Here are the visual representations of the performance data generated for this experiment:
+
+### Architecture Comparison
+![Hypervisor Architecture](graphs/01_hypervisor_architecture.png)
+
+### Events per Second Comparison
+![Events per Second](graphs/02_events_per_second.png)
+
+### Total Events and Time per Event
+![Total Events and Time per Event](graphs/03_total_events_and_time_per_event.png)
+
+### Average Latency Comparison
+![Average Latency Comparison](graphs/04_latency_comparison.png)
+
+### Latency Consistency
+![Latency Consistency](graphs/05_latency_consistency.png)
+
+### Relative Performance
+![Relative Performance](graphs/06_relative_performance.png)
+
+### Type-2 VM Resources
+![Type-2 VM Resources](graphs/07_type2_vm_resources.png)
+
+### Performance Summary Dashboard
+![Performance Summary Dashboard](graphs/08_summary_dashboard.png)
 
 ## Performance Analysis
 
@@ -202,6 +230,16 @@ Cloud-Computing-Lab/
     │   │
     │   └── comparison/
     │       └── 01-hypervisor-performance-comparison.png
+    │
+    ├── graphs/
+    │   ├── 01_hypervisor_architecture.png
+    │   ├── 02_events_per_second.png
+    │   ├── 03_total_events_and_time_per_event.png
+    │   ├── 04_latency_comparison.png
+    │   ├── 05_latency_consistency.png
+    │   ├── 06_relative_performance.png
+    │   ├── 07_type2_vm_resources.png
+    │   └── 08_summary_dashboard.png
     │
     └── results/
         └── performance-analysis.md
